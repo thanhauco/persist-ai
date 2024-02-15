@@ -1,0 +1,21 @@
+{
+  "name": "ruby-aphelion",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "js-tiktoken": "^1.0.21",
+    "pg": "^8.16.3",
+    "pgvector": "^0.2.1",
+    "redis": "^5.10.0",
+    "uuid": "^13.0.0"
+  }
+}
