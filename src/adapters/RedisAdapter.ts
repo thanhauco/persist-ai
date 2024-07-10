@@ -13,6 +13,11 @@ export class RedisAdapter extends BaseAdapter {
   }
 
   async store(memory: Memory): Promise<void> {
+    // Safety truncation for Redis keys/values
+    if (memory.content.length > 100000) {
+        memory.content = memory.content.slice(0, 100000) + '...[TRUNCATED]';
+    }
+
     const key = `memory:${memory.userId}:${memory.id}`;
     await this.client.set(key, JSON.stringify(memory));
     // Factual data persists longer in cache vs others
