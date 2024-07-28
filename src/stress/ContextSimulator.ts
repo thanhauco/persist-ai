@@ -1,11 +1,11 @@
-import { encoding_for_model } from "js-tiktoken";
+import { encodingForModel } from "js-tiktoken";
 import { DataGenerator } from "../mock/DataGenerator";
 
 export class ContextSimulator {
   private encoder;
 
   constructor() {
-    this.encoder = encoding_for_model("gpt-4");
+    this.encoder = encodingForModel("gpt-4");
   }
 
   countTokens(text: string): number {
