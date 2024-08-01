@@ -15,6 +15,8 @@ Persistent memory for AI agents. Solve context limits and maintain knowledge acr
 - Semantic search retrieval
 - Automatic memory extraction
 - Context window stress testing (100K+ tokens)
+- MCP Server Integration: Plug directly into Claude Desktop or other agents.
+- Dreaming & Consolidation: Background optimization of memory storage.
 
 ## Usage
 
