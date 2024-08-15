@@ -4,6 +4,7 @@ import { MemoryStore } from './MemoryStore';
 import { MemoryTiers } from './MemoryTiers';
 import { RedisAdapter } from './adapters/RedisAdapter';
 import { PostgresAdapter } from './adapters/PostgresAdapter';
+import { Consolidator } from './Consolidator';
 
 dotenv.config();
 
@@ -21,12 +22,22 @@ const start = async () => {
   const tiers = new MemoryTiers(redis, pg);
   const store = new MemoryStore(tiers);
   
-  // Initialize API
-  const app = createApi(store);
-  
-  app.listen(PORT, () => {
-    console.log(`PersistAI server running on port ${PORT}`);
-  });
+  // Background Services
+  const consolidator = new Consolidator(store);
+  consolidator.start();
+
+  // Check mode
+  if (process.argv.includes('--mcp')) {
+      const { MCPServer } = await import('./mcp-server');
+      const mcp = new MCPServer(store);
+      mcp.start();
+  } else {
+      // Initialize API
+      const app = createApi(store);
+      app.listen(PORT, () => {
+        console.log(`PersistAI server running on port ${PORT}`);
+      });
+  }
 };
 
 start().catch(console.error);
