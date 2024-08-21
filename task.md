@@ -28,6 +28,11 @@
 
 - [x] Build REST API endpoints (Express)
 - [x] Add Docker & CI/CD pipeline
+- [x] Implement MCP Server
+
+## Phase 6: Advanced Features
+
+- [x] Implement Memory Consolidation Service
 
 ## Phase 5: Bug Fixing & Refinement
 
