@@ -95,6 +95,36 @@ export class PostgresAdapter extends BaseAdapter {
     }
   }
 
+  async createEdge(sourceId: string, targetId: string, relation: string, weight: number = 1.0) {
+      const sql = `
+        INSERT INTO memory_edges (source_id, target_id, relation, weight)
+        VALUES ($1, $2, $3, $4)
+        ON CONFLICT (source_id, target_id, relation) DO UPDATE SET weight = $4
+      `;
+      await this.pool.query(sql, [sourceId, targetId, relation, weight]);
+  }
+
+  async getRelatedMemories(id: string, relationType?: string): Promise<any[]> {
+      let sql = `
+        SELECT m.*, e.relation, e.weight
+        FROM memory_edges e
+        JOIN memories m ON e.target_id = m.id
+        WHERE e.source_id = $1
+      `;
+      const params = [id];
+      if (relationType) {
+          sql += ` AND e.relation = $2`;
+          params.push(relationType);
+      }
+      
+      const res = await this.pool.query(sql, params);
+      return res.rows.map(row => ({
+          ...this.mapRowToMemory(row),
+          relation: row.relation,
+          weight: row.weight
+      }));
+  }
+
   private mapRowToMemory(row: any): Memory {
     return {
       id: row.id,
