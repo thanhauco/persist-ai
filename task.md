@@ -34,6 +34,23 @@
 
 - [x] Implement Memory Consolidation Service
 
+## Phase 7: Knowledge Graph (GraphRAG)
+
+- [x] Add Graph Schema (Edges/Relations)
+- [x] Implement Graph Traversal in PostgresAdapter
+- [x] Update Extractor for Triple Extraction
+
+## Phase 8: Visual Dashboard
+
+- [x] Initialize Next.js Web App
+- [x] Build Knowledge Graph Visualization
+- [x] Connect Dashboard to API
+
+## Phase 9: Security & Privacy
+
+- [x] Implement PII Redaction
+- [x] Add Field-Level Encryption
+
 ## Phase 5: Bug Fixing & Refinement
 
 - [x] Simulate and resolve edge cases
